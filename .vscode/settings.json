@@ -5,6 +5,8 @@
     "markdown": false,
     "scminput": false,
     "html": true,
-    "javascript": true
+    "javascript": true,
+    "http": false,
+    "json": false
   }
 }

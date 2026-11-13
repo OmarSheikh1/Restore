@@ -6,57 +6,53 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace API.Data.Migrations;
-
-[DbContext(typeof(StoreContext))]
-partial class StoreContextModelSnapshot : ModelSnapshot
+namespace API.Data.Migrations
 {
-    // If you encounter a merge conflict in the line below, it means you need to
-    // discard one of the migration branches and recreate its migrations on top of
-    // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261112065138_InitailCreate";
-
-    protected override void BuildModel(ModelBuilder modelBuilder)
+    [DbContext(typeof(StoreContext))]
+    partial class StoreContextModelSnapshot : ModelSnapshot
     {
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
 #pragma warning disable 612, 618
-        modelBuilder.HasAnnotation("ProductVersion", "11.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
 
-        modelBuilder.Entity("API.Entities.Product", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("INTEGER");
+            modelBuilder.Entity("API.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                b.Property<string>("Brand")
-                    .IsRequired()
-                    .HasColumnType("TEXT");
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                b.Property<string>("Description")
-                    .IsRequired()
-                    .HasColumnType("TEXT");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                b.Property<string>("Name")
-                    .IsRequired()
-                    .HasColumnType("TEXT");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                b.Property<string>("PictureUrl")
-                    .IsRequired()
-                    .HasColumnType("TEXT");
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                b.Property<long>("Price")
-                    .HasColumnType("INTEGER");
+                    b.Property<long>("Price")
+                        .HasColumnType("INTEGER");
 
-                b.Property<int>("QuantityInStock")
-                    .HasColumnType("INTEGER");
+                    b.Property<int>("QuantityInStock")
+                        .HasColumnType("INTEGER");
 
-                b.Property<string>("Type")
-                    .IsRequired()
-                    .HasColumnType("TEXT");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                b.HasKey("Id");
+                    b.HasKey("Id");
 
-                b.ToTable("Products");
-            });
+                    b.ToTable("Products");
+                });
 #pragma warning restore 612, 618
+        }
     }
 }

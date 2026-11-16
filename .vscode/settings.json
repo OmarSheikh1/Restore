@@ -9,7 +9,7 @@
     "http": false,
     "json": false,
     "typescript": true,
-    "typescriptreact": true,
+    "typescriptreact": false,
     "csharp": true
   }
 }

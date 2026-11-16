@@ -1,0 +1,1 @@
+export { ProductServiceProvider } from './provider'

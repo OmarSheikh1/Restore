@@ -8,6 +8,19 @@ Use **Theme settings** in the top-right corner to choose System, Light, Dark,
 Exotic, or Nature. The selection applies throughout the app and is saved in
 browser storage. System follows the device's light or dark preference.
 
+## Products
+
+Start the API with its HTTPS profile on `https://localhost:5001`, then run
+`npm run dev` in `client` and open `http://localhost:3000`. The Products menu
+opens a searchable, paginated catalog; select a product for its details. Prices
+are displayed in USD from the API's cent values.
+
+Vite proxies `/api` and `/images` to the local API in development, accepting
+its development certificate. Product images show a placeholder if unavailable.
+For production, configure the web server to forward these paths to the API and
+serve the SPA entry point for client-side routes, including `/products/:id`.
+Run the product API service tests with `npm test` on Node.js 22.6 or newer.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)

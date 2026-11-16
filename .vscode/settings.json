@@ -10,6 +10,6 @@
     "json": false,
     "typescript": true,
     "typescriptreact": false,
-    "csharp": true
+    "csharp": false
   }
 }

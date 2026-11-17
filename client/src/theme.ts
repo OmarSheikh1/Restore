@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react'
 
-type ThemeName = 'system' | 'light' | 'dark' | 'exotic' | 'nature'
+type ThemeName = 'system' | 'light' | 'dark' | 'exotic' | 'nature' | 'liquid'
 type ColorTheme = Exclude<ThemeName, 'system'>
 type ThemeColors = Record<
   | '--text'
@@ -24,6 +24,7 @@ export const themeOptions: { name: ThemeName; label: string }[] = [
   { name: 'dark', label: 'Dark' },
   { name: 'exotic', label: 'Exotic' },
   { name: 'nature', label: 'Nature' },
+  { name: 'liquid', label: 'Liquid' },
 ]
 
 const themes: Record<ColorTheme, ThemeColors> = {
@@ -44,19 +45,26 @@ const themes: Record<ColorTheme, ThemeColors> = {
     '--shadow': 'rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px',
   },
   exotic: {
-    '--text': '#ffb8d7', '--text-h': '#ffe8f2', '--bg': '#1a0033',
-    '--border': '#9b326e', '--code-bg': '#2d1b4e', '--accent': '#ff9bc6',
-    '--accent-bg': 'rgba(233, 30, 99, 0.2)',
-    '--accent-border': '#e65b99', '--social-bg': '#2d1b4e',
-    '--shadow': 'rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px',
+    '--text': '#ecd3e8', '--text-h': '#fff0fa', '--bg': '#35204a',
+    '--border': '#74508a', '--code-bg': '#43295c', '--accent': '#ffa6cf',
+    '--accent-bg': 'rgba(233, 30, 99, 0.22)',
+    '--accent-border': '#ec7fb3', '--social-bg': '#43295c',
+    '--shadow': 'rgba(0, 0, 0, 0.3) 0 10px 15px -3px, rgba(0, 0, 0, 0.18) 0 4px 6px -2px',
   },
   nature: {
-    '--text': '#59564f', '--text-h': '#2d2924', '--bg': '#faf8f3',
-    '--border': '#d4cec0', '--code-bg': '#ede9dc', '--accent': '#047857',
-    '--accent-bg': 'rgba(5, 150, 105, 0.1)',
-    '--accent-border': 'rgba(5, 150, 105, 0.5)', '--social-bg': '#ede9dc',
-    '--shadow': 'rgba(45, 41, 36, 0.12) 0 10px 15px -3px, rgba(45, 41, 36, 0.06) 0 4px 6px -2px',
+    '--text': '#53665b', '--text-h': '#1e3327', '--bg': '#f4f8f2',
+    '--border': '#c8d8ca', '--code-bg': '#e6efe5', '--accent': '#28734e',
+    '--accent-bg': 'rgba(40, 115, 78, 0.1)',
+    '--accent-border': 'rgba(40, 115, 78, 0.5)', '--social-bg': '#e8f0e6',
+    '--shadow': 'rgba(30, 51, 39, 0.12) 0 10px 15px -3px, rgba(30, 51, 39, 0.06) 0 4px 6px -2px',
   },
+      liquid: {
+        '--text': '#3f4f6b', '--text-h': '#10203d', '--bg': '#dbe9fb',
+        '--border': 'rgba(255, 255, 255, 0.65)', '--code-bg': 'rgba(255, 255, 255, 0.45)',
+        '--accent': '#1f6feb', '--accent-bg': 'rgba(31, 111, 235, 0.14)',
+        '--accent-border': 'rgba(31, 111, 235, 0.45)', '--social-bg': 'rgba(255, 255, 255, 0.4)',
+        '--shadow': 'rgba(31, 60, 120, 0.2) 0 8px 32px 0, rgba(255, 255, 255, 0.6) 0 1px 0 inset',
+      },
 }
 
 function loadTheme(): ThemeName {

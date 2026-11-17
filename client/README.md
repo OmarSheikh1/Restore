@@ -5,7 +5,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 ## Themes
 
 Use **Theme settings** in the top-right corner to choose System, Light, Dark,
-Exotic, or Nature. The selection applies throughout the app and is saved in
+Exotic, Nature, or Liquid (a translucent liquid-glass look). The selection applies throughout the app and is saved in
 browser storage. System follows the device's light or dark preference.
 
 ## Products

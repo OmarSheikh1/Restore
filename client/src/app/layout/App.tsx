@@ -1,12 +1,11 @@
-import { Component, lazy, Suspense } from 'react'
+import { Component, lazy, Suspense, useRef } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom'
-import { themeOptions, useTheme } from './theme'
-import { ProductServiceProvider } from './features/products'
-import './App.css'
+import { themeOptions, useTheme } from '../../theme'
+import { ProductServiceProvider } from '../features/products'
 
-const ProductsPage = lazy(() => import('./features/products/pages/ProductsPage'))
-const ProductDetailPage = lazy(() => import('./features/products/pages/ProductDetailPage'))
+const ProductsPage = lazy(() => import('../features/products/pages/ProductsPage'))
+const ProductDetailPage = lazy(() => import('../features/products/pages/ProductDetailPage'))
 
 class RouteErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false }
@@ -28,6 +27,7 @@ class RouteErrorBoundary extends Component<{ children: ReactNode }, { failed: bo
 
 function App() {
   const { theme, setTheme } = useTheme()
+  const themeSettingsRef = useRef<HTMLDetailsElement>(null)
 
   return (
     <BrowserRouter>
@@ -36,7 +36,7 @@ function App() {
         <nav aria-label="Main navigation">
           <NavLink to="/products">Products</NavLink>
         </nav>
-        <details className="theme-settings">
+        <details className="theme-settings" ref={themeSettingsRef}>
           <summary>Theme settings</summary>
           <fieldset>
             <legend>Choose a theme</legend>
@@ -47,7 +47,10 @@ function App() {
                   name="theme"
                   value={option.name}
                   checked={theme === option.name}
-                  onChange={() => setTheme(option.name)}
+                  onChange={() => {
+                    setTheme(option.name)
+                    if (themeSettingsRef.current) themeSettingsRef.current.open = false
+                  }}
                 />
                 {option.label}
               </label>

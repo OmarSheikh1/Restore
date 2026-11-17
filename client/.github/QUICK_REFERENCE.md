@@ -92,7 +92,10 @@ src/
 │   ├── layouts/       (MainLayout, AuthLayout)
 │   └── themes/        (lightTheme, darkTheme, etc)
 │
-└── features/          ← Business features (self-contained)
+└── app/
+    ├── layout/        ← Application shell and styles
+    ├── models/        ← Application data models
+    └── features/      ← Business features (self-contained)
     ├── auth/
     │   ├── pages/     (LoginPage, RegisterPage)
     │   ├── components/(LoginForm, etc)
@@ -162,7 +165,7 @@ No component changes needed!
 ```
 Create new feature (e.g., Products):
 
-✅ Create features/products/ folder
+✅ Create app/features/products/ folder
 ✅ Create pages/ProductsListPage.tsx
 ✅ Create components/ProductCard.tsx
 ✅ Create hooks/useProducts.hook.ts

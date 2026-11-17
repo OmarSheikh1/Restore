@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
+import type { Product, ProductPage } from '../../models/product'
 import { useProductService } from './context'
-import type { Product, ProductPage } from './types'
 
 type LoadState<T> = { status: 'loading' } | { status: 'loaded'; data: T } | { status: 'error'; message: string }
 

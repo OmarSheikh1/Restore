@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "test": "node --experimental-strip-types --test src/features/products/service.test.mjs",
+    "test": "node --experimental-strip-types --test src/app/features/products/service.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

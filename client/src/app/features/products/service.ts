@@ -1,4 +1,5 @@
-import type { Product, ProductPage, ProductService } from './types'
+import type { Product, ProductPage } from '../../models/product'
+import type { ProductService } from './types'
 
 export class ProductApiError extends Error {
   readonly status: number

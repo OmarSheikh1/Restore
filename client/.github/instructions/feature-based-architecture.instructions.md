@@ -17,7 +17,7 @@ Feature-based architecture organizes code around business features instead of te
 
 ### 1.1 Standard Feature Layout
 ```
-src/features/
+src/app/features/
 ├── auth/                          # Auth feature
 │   ├── index.ts                   # Public API exports
 │   ├── auth.routes.tsx            # Route definitions
@@ -117,7 +117,7 @@ Exports **only** what external features need. Everything else is internal.
 
 ### 2.2 Example: Auth Feature Index
 ```typescript
-// src/features/auth/index.ts
+// src/app/features/auth/index.ts
 // ONLY export what other features use
 
 export type { User, AuthState } from './types/auth.types';
@@ -134,7 +134,7 @@ export { authRoutes } from './auth.routes';
 
 ### 2.3 Example: Products Feature Index
 ```typescript
-// src/features/products/index.ts
+// src/app/features/products/index.ts
 export type { Product, ProductFilter } from './types/product.types';
 export { useProducts } from './hooks/useProducts.hook';
 export { ProductCard } from './components/ProductCard';
@@ -149,7 +149,7 @@ export { productRoutes } from './products.routes';
 
 ### 3.1 Route Definition Pattern
 ```typescript
-// src/features/auth/auth.routes.tsx
+// src/app/features/auth/auth.routes.tsx
 import { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
@@ -178,7 +178,7 @@ export const authRoutes: RouteObject[] = [
 
 ### 3.2 Products Feature Routes
 ```typescript
-// src/features/products/products.routes.tsx
+// src/app/features/products/products.routes.tsx
 import { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
@@ -216,7 +216,7 @@ export const productRoutes: RouteObject[] = [
 
 ### 4.1 Keep Types Local to Feature
 ```typescript
-// src/features/products/types/product.types.ts
+// src/app/features/products/types/product.types.ts
 export interface Product {
   id: string;
   name: string;
@@ -287,7 +287,7 @@ export interface ApiError {
 
 ### 5.1 Local Service Example
 ```typescript
-// src/features/products/services/ProductLocalService.ts
+// src/app/features/products/services/ProductLocalService.ts
 // Business logic specific to products feature
 
 import { IApiClient } from '@abstractions/api.abstraction';
@@ -334,7 +334,7 @@ export class ProductLocalService {
 
 ### 5.2 Using Local Service in Hook
 ```typescript
-// src/features/products/hooks/useProducts.hook.ts
+// src/app/features/products/hooks/useProducts.hook.ts
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { container } from '@/core/di/container';
@@ -366,7 +366,7 @@ export const useProducts = (filter?: ProductFilter) => {
 
 ### 6.1 Component Organization
 ```typescript
-// src/features/products/components/ProductCard.tsx
+// src/app/features/products/components/ProductCard.tsx
 // Feature-specific component - ONLY used within products feature
 
 import { Product } from '../types/product.types';
@@ -412,9 +412,9 @@ export const Card = ({ children, variant = 'default' }) => {
 // DashboardCard uses Card internally
 ```
 
-**Feature Components** (specific, in `features/` folder):
+**Feature Components** (specific, in `app/features/` folder):
 ```typescript
-// src/features/products/components/ProductCard.tsx
+// src/app/features/products/components/ProductCard.tsx
 // Uses generic Card from UI, adds product-specific logic
 
 import { Card } from '@/ui/components/Card';
@@ -434,7 +434,7 @@ export const ProductCard = ({ product }) => {
 
 ### 7.1 Page Component Example
 ```typescript
-// src/features/products/pages/ProductsListPage.tsx
+// src/app/features/products/pages/ProductsListPage.tsx
 import { Suspense, useState } from 'react';
 import { useProducts } from '../hooks/useProducts.hook';
 import { ProductFilter } from '../types/product.types';
@@ -479,7 +479,7 @@ export default function ProductsListPage() {
 
 ### 7.2 Page with Form Example
 ```typescript
-// src/features/products/pages/ProductFormPage.tsx
+// src/app/features/products/pages/ProductFormPage.tsx
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProductForm } from '../hooks/useProductForm.hook';
 import { ProductForm } from '../components/ProductForm';
@@ -521,7 +521,7 @@ export default function ProductFormPage() {
 
 ### 8.1 Custom Hook Pattern
 ```typescript
-// src/features/products/hooks/useProductForm.hook.ts
+// src/app/features/products/hooks/useProductForm.hook.ts
 import { useEffect, useState } from 'react';
 import { useNotification } from '@/services/notification/useNotification.hook';
 import { container } from '@/core/di/container';
@@ -597,7 +597,7 @@ export const useProductForm = (productId?: string): UseProductFormReturn => {
 
 ### 9.2 Example: Products Context
 ```typescript
-// src/features/products/products.context.tsx
+// src/app/features/products/products.context.tsx
 import { createContext, PropsWithChildren, useState } from 'react';
 import { ProductFilter } from './types/product.types';
 
@@ -644,7 +644,7 @@ export const useProductsContext = () => {
 
 ### 9.3 Using Feature Context
 ```typescript
-// src/features/products/pages/ProductsListPage.tsx
+// src/app/features/products/pages/ProductsListPage.tsx
 import { ProductsProvider } from '../products.context';
 import { ProductsList } from '../components/ProductsList';
 import { ProductsFilters } from '../components/ProductsFilters';
@@ -728,7 +728,7 @@ eventBus.subscribe('product:created', (product) => {
 
 ### 11.1 Feature Test Organization
 ```typescript
-// src/features/products/__tests__/ProductsListPage.test.tsx
+// src/app/features/products/__tests__/ProductsListPage.test.tsx
 import { render, screen } from '@testing-library/react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import ProductsListPage from '../pages/ProductsListPage';
@@ -750,7 +750,7 @@ describe('ProductsListPage', () => {
 
 ### 11.2 Service Testing
 ```typescript
-// src/features/products/services/__tests__/ProductLocalService.test.ts
+// src/app/features/products/services/__tests__/ProductLocalService.test.ts
 import { ProductLocalService } from '../ProductLocalService';
 
 class MockApiClient implements IApiClient {
@@ -779,7 +779,7 @@ describe('ProductLocalService', () => {
 
 ### 12.1 Large Feature Structure
 ```
-features/admin/
+src/app/features/admin/
 ├── index.ts
 ├── admin.routes.tsx
 ├── pages/
@@ -821,7 +821,7 @@ features/admin/
 
 ## 13. Checklist for New Feature
 
-- [ ] Create feature folder in `src/features/`
+- [ ] Create feature folder in `src/app/features/`
 - [ ] Create index.ts with public API
 - [ ] Create feature routes (feature.routes.tsx)
 - [ ] Create types in types/ folder (not in core)

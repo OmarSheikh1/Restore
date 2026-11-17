@@ -96,7 +96,9 @@ code {
 }
 
 .app-header {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 24px;
   padding: 16px 24px;
@@ -113,7 +115,6 @@ code {
 
 .app-header nav {
   display: flex;
-  flex: 1;
   gap: 16px;
 }
 
@@ -133,6 +134,7 @@ a {
 
 .theme-settings {
   position: relative;
+  justify-self: end;
   color: var(--text-h);
 }
 
@@ -146,28 +148,77 @@ a {
   font: inherit;
 }
 
-.theme-settings fieldset {
+.theme-settings summary,
+.menu-toggle {
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 9px;
+  box-sizing: border-box;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.theme-settings summary {
+  display: grid;
+  list-style: none;
+}
+
+.theme-settings summary::-webkit-details-marker {
+  display: none;
+}
+
+.theme-settings summary svg,
+.menu-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+.theme-panel {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   right: 0;
-  min-width: 160px;
-  margin: 8px 0 0;
-  padding: 12px;
+  top: calc(100% + 8px);
+  width: 190px;
+  padding: 10px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 12px;
   background: var(--bg);
   box-shadow: var(--shadow);
+}
+
+.theme-settings fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.theme-settings legend {
+  padding: 4px 10px 8px;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .theme-settings label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 0;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
+.theme-settings label:hover,
+.theme-settings label.selected {
+  background: var(--accent-bg);
+}
+
 .theme-settings input {
+  margin: 0;
   accent-color: var(--accent);
 }
 
@@ -193,7 +244,7 @@ a {
 
 :root[data-theme='liquid'] .app-header,
 :root[data-theme='liquid'] .product-card,
-:root[data-theme='liquid'] .theme-settings fieldset,
+:root[data-theme='liquid'] .theme-panel,
 :root[data-theme='liquid'] .theme-settings summary,
 :root[data-theme='liquid'] button,
 :root[data-theme='liquid'] .button-link,
@@ -210,7 +261,7 @@ a {
 }
 
 :root[data-theme='liquid'] .product-card,
-:root[data-theme='liquid'] .theme-settings fieldset {
+:root[data-theme='liquid'] .theme-panel {
   border-radius: 20px;
 }
 
@@ -349,7 +400,34 @@ a {
   .app-header {
     gap: 12px;
     padding: 12px;
-    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: grid;
+  }
+
+  .app-header nav {
+    position: absolute;
+    z-index: 3;
+    top: 100%;
+    left: 12px;
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    min-width: 160px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    box-shadow: var(--shadow);
+  }
+
+  .app-header nav.menu-open {
+    display: flex;
+  }
+
+  .app-header nav a {
+    padding: 10px 12px;
   }
 
   .main-content {

@@ -112,7 +112,9 @@ code {
 }
 
 .app-header nav {
+  display: flex;
   flex: 1;
+  gap: 16px;
 }
 
 a {

@@ -1,11 +1,8 @@
-import { Component, lazy, Suspense, useRef } from 'react'
+import { Component, Suspense, useRef } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
-import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import { themeOptions, useTheme } from '../../theme'
 import { ProductServiceProvider } from '../features/products'
-
-const ProductsPage = lazy(() => import('../features/products/pages/ProductsPage'))
-const ProductDetailPage = lazy(() => import('../features/products/pages/ProductDetailPage'))
 
 class RouteErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false }
@@ -30,11 +27,12 @@ function App() {
   const themeSettingsRef = useRef<HTMLDetailsElement>(null)
 
   return (
-    <BrowserRouter>
+    <>
       <header className="app-header">
         <Link className="brand" to="/">Restore</Link>
         <nav aria-label="Main navigation">
           <NavLink to="/products">Products</NavLink>
+          <NavLink to="/about">About</NavLink>
         </nav>
         <details className="theme-settings" ref={themeSettingsRef}>
           <summary>Theme settings</summary>
@@ -62,17 +60,12 @@ function App() {
         <ProductServiceProvider>
           <RouteErrorBoundary>
             <Suspense fallback={<p role="status">Loading page...</p>}>
-              <Routes>
-                <Route path="/" element={<section><h1>Welcome to Restore</h1><p>Explore our collection of products.</p><Link className="button-link" to="/products">Browse products</Link></section>} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/products/:id" element={<ProductDetailPage />} />
-                <Route path="*" element={<section><h1>Page not found</h1><Link to="/products">Browse products</Link></section>} />
-              </Routes>
+              <Outlet />
             </Suspense>
           </RouteErrorBoundary>
         </ProductServiceProvider>
       </main>
-    </BrowserRouter>
+    </>
   )
 }
 

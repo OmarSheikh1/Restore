@@ -1,5 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { setupListeners } from '@reduxjs/toolkit/query'
 import type { Product } from '../models/product'
+import { productsApi } from '../features/productsRtk/api'
 
 interface PhysicalStore {
   name: string
@@ -35,8 +37,12 @@ export const store = configureStore({
   reducer: {
     physicalStore: physicalStoreSlice.reducer,
     browsedProducts: browsedProductsSlice.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
   },
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(productsApi.middleware),
 })
+
+setupListeners(store.dispatch)
 
 export const { addBrowsedProduct } = browsedProductsSlice.actions
 export type RootState = ReturnType<typeof store.getState>

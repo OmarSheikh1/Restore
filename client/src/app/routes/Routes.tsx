@@ -5,6 +5,7 @@ import App from '../layout/App'
 const ProductsPage = lazy(() => import('../features/products/pages/ProductsPage'))
 const ProductDetailPage = lazy(() => import('../features/products/pages/ProductDetailPage'))
 const BrowsedProductsPage = lazy(() => import('../features/products/pages/BrowsedProductsPage'))
+const RtkProductsPage = lazy(() => import('../features/productsRtk/pages/RtkProductsPage'))
 const AboutPage = lazy(() => import('../features/about/pages/AboutPage'))
 const ContactPage = lazy(() => import('../features/contact/pages/ContactPage'))
 
@@ -26,6 +27,7 @@ export default function AppRoutes() {
           <Route path="products" element={<ProductsPage />} />
           <Route path="products/:id" element={<ProductDetailPage />} />
           <Route path="browsed-products" element={<BrowsedProductsPage />} />
+          <Route path="products-rtk" element={<RtkProductsPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route

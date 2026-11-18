@@ -32,6 +32,7 @@ export default function NavBar() {
         <nav id="main-navigation" className={menuOpen ? 'menu-open' : ''} aria-label="Main navigation">
           <NavLink to="/products" onClick={() => setMenuOpen(false)}>Products</NavLink>
           <NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink>
+          <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</NavLink>
         </nav>
       </div>
       <Link className="brand" to="/" onClick={() => setMenuOpen(false)}>ReStore</Link>
